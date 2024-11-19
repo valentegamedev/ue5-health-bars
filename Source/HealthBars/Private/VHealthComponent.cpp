@@ -38,12 +38,11 @@ void UVHealthComponent::UpdateHealth(float DeltaHealth)
 	Health+=DeltaHealth;
 	//Clamp the health to avoid values less than 0 and bigger than MaxHealth
 	Health = FMath::Clamp(Health, 0.0f, MaxHealth);
-	 
+
+	OnHealthChanged.Broadcast(Health, MaxHealth);
+	
 	if(Health == 0.0f)
 	{
 		OnHealthDepleted.Broadcast();
-	} else
-	{
-		OnHealthChanged.Broadcast(Health, MaxHealth);
 	}
 }
